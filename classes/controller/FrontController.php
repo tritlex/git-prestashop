@@ -330,6 +330,8 @@ class FrontControllerCore extends Controller
 			'priceDisplay' => Product::getTaxCalculationMethod((int)$this->context->cookie->id_customer),
 			'add_prod_display' => (int)Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY'),
 			'shop_name' => Configuration::get('PS_SHOP_NAME'),
+			'shop_city' => Configuration::get('PS_SHOP_CITY'),
+			'shop_phone' => Configuration::get('PS_SHOP_PHONE'),
 			'roundMode' => (int)Configuration::get('PS_PRICE_ROUND_MODE'),
 			'use_taxes' => (int)Configuration::get('PS_TAX'),
 			'show_taxes' => (int)(Configuration::get('PS_TAX_DISPLAY') == 1 && (int)Configuration::get('PS_TAX')),
@@ -778,6 +780,11 @@ class FrontControllerCore extends Controller
 			'PS_ALLOW_MOBILE_DEVICE' => isset($_SERVER['HTTP_USER_AGENT']) && (bool)Configuration::get('PS_ALLOW_MOBILE_DEVICE') && @filemtime(_PS_THEME_MOBILE_DIR_)
 		));
 
+		global $smarty;
+  
+		$telephone = Configuration::get('PS_SHOP_PHONE');
+		$smarty->assign('telephone', $telephone);
+		
 	}
 	
 	public function checkLiveEditAccess()
